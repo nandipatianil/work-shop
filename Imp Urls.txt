@@ -1,0 +1,45 @@
+https://tomcat.apache.org/download-70.cgi
+E:\Apps\tomcat7\bin>startup.bat
+
+
+https://maven.apache.org/download.cgi
+
+https://wiki.jenkins-ci.org/display/JENKINS/Static+Code+Analysis+Plug-ins  for code analysis
+https://wiki.jenkins.io/display/JENKINS/Analysis+Collector+Plugin  
+
+https://www.tutorialspoint.com/jenkins/jenkins_distributed_builds.htm   for master slave node
+
+pcspega
+pcspega@
+
+
+https://github.com/jenkinsci/pipeline-examples/blob/master/declarative-examples/jenkinsfile-examples/mavenDocker.groovy
+
+stage 'test'																				
+   parallel 'test': {
+     sh "${mvnHome}/bin/mvn test;
+	 
+https://github.com/kesselborn/jenkinsfile/blob/00a983b8122203552faad3c8a8242587b6c9ddd4/Jenkinsfile
+
+
+stage 'checkout'
+
+   // Get some code from a GitHub repository
+   git url: 'https://github.com/kesselborn/jenkinsfile'
+   sh 'git clean -fdx; sleep 4;'
+
+   // Get the maven tool.
+   // ** NOTE: This 'mvn' maven tool must be configured
+   // **       in the global configuration.
+   def mvnHome = tool 'mvn'
+   
+   
+   
+  steps {
+                dir('postman') {
+                    nodejs('nodejs') {
+					
+					
+					
+					
+https://github.com/jenkinsci/pipeline-plugin/blob/master/TUTORIAL.md

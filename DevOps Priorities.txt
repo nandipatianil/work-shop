@@ -1,0 +1,11 @@
+DevOps Priorities
+
+1) Different developers develop their code in the local with their respective branches.
+2) From Different branches code will be merged into one common branch namely as MASTER branch.
+3) As of now code is in local repository, from their we need to push the code into centralized repository.
+4) So, after pushing the code into the centralized repository, it gets build through automation.
+5) From the automation tool we will set it as first it should be build, then test and finally deploy.
+6) Once the build gets succeeded it will goto TEST environment, if not again it will goto developers team to rectify the code.
+7) So, parallely all the builds will be getting saved in the binary repository.
+8) And parallely code will be reviewed and tracked using the particular tool to get the better quality outputs.
+9) Finally after the successive builds and test in all environments, the deployment process will takes place.
