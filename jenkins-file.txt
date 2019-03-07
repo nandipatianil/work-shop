@@ -1,0 +1,55 @@
+pipeline {
+  agent {
+  environment {												
+    IMAGE = readMavenPom().getArtifactId()	//Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
+    VERSION = readMavenPom().getVersion()
+  }
+  stages {
+    stage('Build') {
+      agent {
+          reuseNode true
+          image 'maven:3.5.0-jdk-8'			// update maven version
+        }
+      }
+      steps {
+         {
+          sh 'mvn clean findbugs:findbugs package'
+        }
+      }
+      post {
+        success {
+          // we only worry about archiving the jar file if the build steps are successful
+          archiveArtifacts(artifacts: '**/target/*.jar', allowEmptyArchive: true)
+        }
+      }
+    
+
+    stage('Quality Analysis') {
+      parallel {
+        // run Sonar Scan and Integration tests in parallel. This syntax requires Declarative Pipeline 1.2 or higher
+        stage ('Integration Test') {
+          agent any  //run this stage on any available agent
+          steps {
+            echo 'Run integration tests here...'
+          }
+        }
+        stage('Sonar Scan') {
+          agent {
+            docker {
+              // we can use the same image and workspace as we did previously
+              reuseNode true
+              image 'maven:3.5.0-jdk-8'
+            }
+          }
+          environment {
+            //use 'sonar' credentials scoped only to this stage
+            SONAR = credentials('sonar')
+          }
+          steps {
+            sh 'mvn sonar:sonar -Dsonar.login=$SONAR_PSW'
+          }
+        }
+      }
+    }
+  }
+  
