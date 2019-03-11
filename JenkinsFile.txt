@@ -4,6 +4,11 @@ pipeline
 			  {
 				 stages
 					{
+						stage('Code Checkout')
+						{
+							def mvnHome=tool name:'E:\\softwares\\apache-maven-3.5.2', type":'maven'
+							bat "${mvnHome}/bin/mvn package"
+						}
 						stage('Compile Stage')
 						{
 							def mvnHome=tool name:'E:\\softwares\\apache-maven-3.5.2', type":'maven'
